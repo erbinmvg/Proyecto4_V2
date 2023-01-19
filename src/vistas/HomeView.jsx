@@ -6,7 +6,7 @@ import {Footer} from "../componentes/Footer"
 
 import { Box, Typography, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { RegistroView } from "./RegistroView";
+
 
 
 

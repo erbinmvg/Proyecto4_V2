@@ -32,45 +32,55 @@ const COLECCION = "clientes";
 
 export const RegistroView = () => {
 
-const [rclte, setRegistro] = useState({});
+const [registro, setRegistro] = useState({
+
+		nombre:"",
+		apellido:"",
+		mail:"",
+		telefono:"",
+});
 	
 
 	//const saveRegistro = () => {
 	//	console.log(rclte);
 	//	}
 
-
-    const nombreTmp=rclte.nombre;
-    const mailTmp=rclte.mail;
-    const telefonoTmp=rclte.personas;
-    const apellidosTmp=rclte.apellidos;
-	const saveRegistro = async () => {
-		try {
-		  await addDoc(collection(db, COLECCION),
-			{
-				mail: mailTmp,
-				nombre: nombreTmp,
-				apellidos: apellidosTmp,
-				telefono: telefonoTmp,
-				hr_registro: Date.now(),
-
-			});
-			
-		} catch (error) {
-		
-		  console.log("Error al registrar cliente ", error);
-		}
-	};
-//
-
 	const handleInput = (e) => {
 
 
 		setRegistro({
-			...rclte,
+			...registro,
 			[e.target.name]: e.target.value
 		});
 	};
+
+
+	const saveRegistro = () => {
+		setRegistro({
+			nombre:"",
+			apellido:"",
+			mail:"",
+			telefono:"",
+			hr_registro: Date.now(),
+		});
+
+		console.log(registro);
+
+		saveData(registro);
+	};
+//
+
+	
+
+
+	const saveData = async (values) => {
+		try {
+			await addDoc(collection(db, "clientes"), values);
+		} catch (error) {
+			console.log("Error ingresasndo reserva", error);
+		}
+		
+	}
 
 	return (
 
@@ -82,7 +92,7 @@ const [rclte, setRegistro] = useState({});
 
 					<Box sx={{
 						mt: 10, px: 2, pt: 2,
-						borderRadius: "20px 20px 0 0 ",
+						borderRadius: "20px ",
 						bgcolor: "grey.A200",
 						width: { xs: "70%", sm: "45%", md: "40%", xl: "35%" }
 					}}>
@@ -91,17 +101,17 @@ const [rclte, setRegistro] = useState({});
 						</Grid>
 
 						<Grid item xs={12} marginBottom={1}>
-							<InputCaja ref={nombre} id="nombre" name="nombre" label="Nombre" accion={(e) => handleInput(e)} />
+							<InputCaja value={registro.nombre} id="nombre" name="nombre" label="Nombre" accion={(e) => handleInput(e)} />
 						</Grid >
 						<Grid item xs={12} marginBottom={1}>
-							<InputCaja ref={apellidos} id="apellidos" name="apellidos" label="Apellidos" accion={(e) => handleInput(e)} />
+							<InputCaja value={registro.apellido} id="apellido" name="apellido" label="Apellido" accion={(e) => handleInput(e)} />
 						</Grid >
 						<Grid item xs={12} marginBottom={2}>
 
-							<InputCaja ref={mail} id="mail" name="mail" label="Email" accion={(e) => handleInput(e)} />
+							<InputCaja value={registro.mail} id="mail" name="mail" label="Email" accion={(e) => handleInput(e)} />
 						</Grid >
 						<Grid item xs={12} marginBottom={2}>
-							<InputCaja ref={telefono} id="personas" name="personas" label="N° de Teléfono" accion={(e) => handleInput(e)} />
+							<InputCaja value={registro.telefono} id="telefono" name="telefono" label="N° de Teléfono" accion={(e) => handleInput(e)} />
 						</Grid >
 
 					</Box>

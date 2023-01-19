@@ -7,7 +7,7 @@ import { Button, Stack, Box } from "@mui/material"
 const accionBtn =()=>{
     console.log("Registro");
 };
-export const BtnGeneral = ({nombreBtn, accion})=>{
+export const BtnGeneral = ({nombreBtn, accion, icon})=>{
 
 
     return(
@@ -18,7 +18,7 @@ export const BtnGeneral = ({nombreBtn, accion})=>{
         }}>
         <Stack spacing={2} sx={{ alignItems:"center", justifyContent: "space-between"}} >
                 
-            <Button sx={{bgcolor: "error.dark"}} color="secondary" onClick={accion} variant="contained">{nombreBtn}</Button>
+            <Button sx={{bgcolor: "error.dark"}} endIcon={icon} color="secondary" onClick={accion} variant="contained">{nombreBtn}</Button>
             
         </Stack>
         </Box>

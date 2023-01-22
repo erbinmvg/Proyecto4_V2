@@ -87,7 +87,7 @@ const [registro, setRegistro] = useState({
 
 		<>
 			<Box sx={{ height: "94vh" }}>
-				<MuiNavbar />
+				
 				<Grid container justifyContent="center" component="main"	>
 
 					<Box sx={{
@@ -131,7 +131,7 @@ const [registro, setRegistro] = useState({
 
 
 			</Box>
-			<Footer />
+		
 		</>
 
 

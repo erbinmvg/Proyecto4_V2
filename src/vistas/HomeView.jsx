@@ -35,8 +35,7 @@ export const HomeView = (props) => {
 	return (
 		<>
 			<Box sx={{ height: "94vh" }}>
-				<MuiNavbar />
-
+				
 				<Grid
 					container
 					justifyContent="center"
@@ -86,7 +85,7 @@ export const HomeView = (props) => {
 					</Grid>
 					
 				</Grid>
-				<Footer />
+				
 				
 			</Box>
 			

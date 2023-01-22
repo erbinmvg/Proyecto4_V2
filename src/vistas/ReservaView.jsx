@@ -5,11 +5,10 @@ import { InputCaja } from "../componentes/InputCaja";
 import { MuiConfirmacion } from "../componentes/MuiConfirmacion"
 
 import { BtnGeneral } from "../componentes/BtnGeneral";
-import { MuiNavbar } from "../componentes/MuiNavbar";
-import { Footer } from "../componentes/Footer"
+
 import { db } from "../config/firebase";
 
-import { getDocs, addDoc, collection } from "firebase/firestore"
+import { addDoc, collection } from "firebase/firestore"
 
 import SendIcon from '@mui/icons-material/Send';
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -17,8 +16,6 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { Grid, Box, Typography, Alert, AlertTitle, Stack, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { set } from 'date-fns';
-import { display } from '@mui/system';
 
 
 
@@ -26,17 +23,15 @@ import { display } from '@mui/system';
 
 
 
-/*const getData = async ()=>{
-	const data = await getDocs(collection(db, "Reservas"));
-	console.log(data.docs.map(doc => doc.data()));
-};*/
+
+
 
 
 export const ReservaView = () => {
 
 
 
-	//getData();
+
 
 	const [isClicked, setIsClicked] = useState(false)
 
@@ -47,10 +42,6 @@ export const ReservaView = () => {
 		personas: "",
 		telefono: ""
 	});
-
-
-
-
 
 
 	const Transition = React.forwardRef(function Transition(props, ref) {
@@ -69,15 +60,7 @@ export const ReservaView = () => {
 			...reserva,
 			[e.target.name]: e.target.value
 		});
-
-		/*setReserva({
-				...reserva,
-				[e.target.name]: e.target.value
-		
-		});*/
 	};
-
-
 
 	const saveReserva = () => {
 		saveData(reserva);
@@ -93,9 +76,7 @@ export const ReservaView = () => {
 		//console.log(e.target.nombre.value);
 		//setOpen(true);
 		console.log("reserva");
-
-
-		 
+ 
 	};
 
 	const saveData = async (values) => {
@@ -106,9 +87,6 @@ export const ReservaView = () => {
 		}
 	
 	}
-
-
-
 
 	const navegar = useNavigate();
 	const verReservas = () => {
@@ -150,7 +128,7 @@ export const ReservaView = () => {
 			</Dialog>
 
 			<Box sx={{ height: "94vh" }}>
-				<MuiNavbar />
+				
 				<Grid container sx={{ display: 'flex' }} justifyContent="center" component="main"	>
 
 
@@ -175,10 +153,8 @@ export const ReservaView = () => {
 							<InputCaja value={reserva.apellido} id="apellido" name="apellido" label="Apellido" accion={(e) => handleInput(e)} />
 						</Grid >
 						<Grid item xs={12} marginBottom={2}>
-
 							<InputCaja value={reserva.mail} id="mail" name="mail" label="Email" accion={(e) => handleInput(e)} />
 						</Grid >
-
 						<Grid item xs={5.5} marginBottom={2}>
 							<InputCaja value={reserva.personas} id="personas" name="personas" label="Cantidad personas" accion={(e) => handleInput(e)} />
 						</Grid >
@@ -186,21 +162,14 @@ export const ReservaView = () => {
 							<InputCaja value={reserva.telefono} id="telefono" name="telefono" label="Telefono" accion={(e) => handleInput(e)} />
 						</Grid >
 						</Grid >
-
 					</Box>
 				</Grid>
-
-
-				{/* <Selector /> */}
-
 
 				<LocalizationProvider dateAdapter={AdapterDateFns}>
 					<Grid item >
 						<MuiPicker handledate={setReserva} isClicked={isClicked} />
 					</Grid>
 				</LocalizationProvider>
-
-
 
 				<Grid container justifyContent="center" >
 					<Box display="flex" justifyContent="space-between" sx={{
@@ -213,19 +182,10 @@ export const ReservaView = () => {
 						<Grid item xs={5} sm={5.5}>
 							<BtnGeneral nombreBtn="Confirmar" accion={saveReserva} icon={<SendIcon />} />
 						</Grid>
-
-
 					</Box>
 				</Grid>
-
-
-
-
-
-
-
 			</Box>
-			<Footer />
+			
 		</>
 
 

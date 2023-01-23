@@ -123,7 +123,7 @@ const [registro, setRegistro] = useState({
 
 				
 				<Grid item xs={7} marginTop={6}>
-					<BtnGeneral nombreBtn="Enviar" accion={saveRegistro} />
+					<BtnGeneral nombreBtn="Enviar" accion={saveRegistro()} />
 					
 				</Grid>
 

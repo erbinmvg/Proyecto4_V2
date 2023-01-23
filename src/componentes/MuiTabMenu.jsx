@@ -21,7 +21,7 @@ export const MuiTabMenu=()=> {
         
           <Button color="inherit" onClick={goHome}>Inicio</Button>
           <Button color="inherit">Registrar</Button>
-          <Button color="inherit">Ingresar</Button>
+          
          
         
       </Box>

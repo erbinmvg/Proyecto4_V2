@@ -9,46 +9,46 @@ import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { db } from "../config/firebase";
 
-import { getDocs, collection } from "firebase/firestore"
-
-const reservas = [
-  /*{
-  nom:"jona",
-  fono:"+ 56942574999",
-  fecha:"21/01/2023",
-  hr:"17:00 PM",
-  cantidad: 4
- },
-  {
-  nom:"lucy",
-  fono:"+ 56911111111",
-  fecha:"21/01/2023",
-  hr:"17:00 PM",
-  cantidad: 7
- }*/
-]
+import { getDocs, collection, getDoc, deleteDoc, doc } from "firebase/firestore"
+import { BtnGeneral } from "../componentes/BtnGeneral";
 
 
+export const DetalleView =  () => {
 
-
-
-
-export const DetalleView = () => {
 
 const [reservas, setReservas] = useState([]);
+
+
+
+const DelReserva = async (id)=>{
+
+  try {
+    await deleteDoc(doc(db, "reservas", id));
+  const newReserva = reservas.filter(el => el.id !== id);
+  setReservas(newReserva);
+  console.log(newReserva);
+  } catch (err) {
+    console.log(err);
+  };
+ 
+  
+  
+};
+
 useEffect( ()=>{
   const getData = async ()=>{
 	const datosReserva = await getDocs(collection(db, "reservas"));
 	let reservas = datosReserva.docs.map(doc => {
-    return {id: doc.id, ...doc.data()}
+    return {id: doc.id, ...doc.data()};
   });
   setReservas(reservas);
+  //console.log(reservas.map(e => e.id ));
 };
 try {
   getData();
 } catch (err) {
-  console.log(err);
-}
+  console.log("error al borrar" + err);
+};
 },[]);
 
 
@@ -64,6 +64,7 @@ try {
           <TableCell align="center">Fecha</TableCell>
           <TableCell align="center">Hora</TableCell>
           <TableCell align="center">N° Personas</TableCell>
+          <TableCell align="center">Accion</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -84,6 +85,7 @@ try {
             <TableCell align="center">{reservas.fechaReserva}</TableCell>
             <TableCell align="center">{reservas.horaReserva}</TableCell>
             <TableCell align="center">{reservas.personas}</TableCell>
+            <TableCell align="center"><BtnGeneral nombreBtn="Borrar" accion={()=>DelReserva(reservas.id)}  /></TableCell>
           </TableRow>
         ))
         }
@@ -91,5 +93,5 @@ try {
     </Table>
   </TableContainer>
   </Box>
-  )
-}
+  );
+};
